@@ -9,21 +9,21 @@ import org.springframework.web.bind.annotation.RestController;
 
 import core.common.encode.PasswordEncoder;
 import core.common.exception.CommonException;
-import core.dao.utils.BaseDao;
-import core.service.services.CRUDService;
-import core.service.utils.CRUDServiceAction;
+import core.dao.dao.BaseDao;
+import core.service.action.CRUDServiceActionConst;
+import core.service.invoke.ServiceResult;
+import core.service.service.CRUDService;
 import core.service.utils.ServiceErrorCode;
-import core.service.utils.ServiceResult;
 import service.auth.dao.UserAccountDao;
 import service.auth.dao.UserProfileDao;
 import service.auth.entities.UserAccount;
 import service.auth.entities.UserProfile;
-import service.auth.shared.action.ServiceAuthAction;
 import service.auth.shared.dto.PasswordDto;
 import service.auth.shared.dto.UserAccountDto;
+import service.auth.shared.service.AuthServiceActionConst;
 
 @RestController
-@RequestMapping(ServiceAuthAction.USERACCOUNT_SERVICE)
+@RequestMapping(AuthServiceActionConst.USERACCOUNT_SERVICE)
 public class UserAccountService extends CRUDService<UserProfile, UserAccountDto> {
 
 	@Autowired
@@ -61,7 +61,7 @@ public class UserAccountService extends CRUDService<UserProfile, UserAccountDto>
 //	}
 	
 	@Override
-	@RequestMapping(value = CRUDServiceAction.DELETE, method = RequestMethod.POST)
+	@RequestMapping(value = CRUDServiceActionConst.DELETE, method = RequestMethod.POST)
 	public ServiceResult delete(@PathVariable("id") long id) throws CommonException {
 		init();
 		UserProfile profile = profileDao.find(id);
@@ -73,7 +73,7 @@ public class UserAccountService extends CRUDService<UserProfile, UserAccountDto>
 		return success(id);
 	}
 	
-	@RequestMapping(value = ServiceAuthAction.UPDATE_PERMISSIONS, method = RequestMethod.POST)
+	@RequestMapping(value = AuthServiceActionConst.UPDATE_PERMISSIONS, method = RequestMethod.POST)
 	public ServiceResult updatePermissions(@RequestBody String permissions, @PathVariable("name") String name) {
 		if (permissions != null) {
 			permissions = permissions.replaceAll("^\"|\"$", "");
@@ -89,7 +89,7 @@ public class UserAccountService extends CRUDService<UserProfile, UserAccountDto>
 		return success(true);
 	}
 
-	@RequestMapping(value = ServiceAuthAction.UPDATE_PASSWORD, method = RequestMethod.POST)
+	@RequestMapping(value = AuthServiceActionConst.UPDATE_PASSWORD, method = RequestMethod.POST)
 	public ServiceResult updatePassword(@RequestBody PasswordDto dto, @PathVariable("name") String name)
 			throws CommonException {
 		UserAccount account = accountDao.find(UserAccount.LOGIN_NAME, name);

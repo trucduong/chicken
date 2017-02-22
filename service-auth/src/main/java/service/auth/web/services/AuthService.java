@@ -12,22 +12,22 @@ import org.springframework.web.bind.annotation.RestController;
 
 import core.common.encode.PasswordEncoder;
 import core.common.exception.CommonException;
+import core.service.invoke.ServiceResult;
 import core.service.security.AuthorizationUser;
-import core.service.services.BaseService;
+import core.service.service.BaseService;
 import core.service.utils.ServiceErrorCode;
-import core.service.utils.ServiceResult;
 import service.auth.dao.PermissionDao;
 import service.auth.dao.UserAccountDao;
 import service.auth.entities.AuthPermission;
 import service.auth.entities.UserAccount;
-import service.auth.shared.action.ServiceAuthAction;
 import service.auth.shared.dto.AuthPermissionDto;
 import service.auth.shared.dto.AuthorizationUserDto;
 import service.auth.shared.dto.PermissionStatus;
 import service.auth.shared.dto.UserAccountDto;
+import service.auth.shared.service.AuthServiceActionConst;
 
 @RestController
-@RequestMapping(ServiceAuthAction.AUTH_SERVICE)
+@RequestMapping(AuthServiceActionConst.AUTH_SERVICE)
 public class AuthService extends BaseService {
 	@Autowired
 	private PermissionDao permissionDao;
@@ -35,7 +35,7 @@ public class AuthService extends BaseService {
 	@Autowired
 	private UserAccountDao accountDao;
 
-	@RequestMapping(value = ServiceAuthAction.PERMISSION_READ_ALL, method = RequestMethod.GET)
+	@RequestMapping(value = AuthServiceActionConst.PERMISSION_READ_ALL, method = RequestMethod.GET)
 	public ServiceResult readAll() throws CommonException {
 		init();
 		List<AuthPermission> entities = permissionDao.getAllData();
@@ -61,7 +61,7 @@ public class AuthService extends BaseService {
 		return this.getClass();
 	}
 
-	@RequestMapping(value = ServiceAuthAction.LOGIN, method = RequestMethod.POST)
+	@RequestMapping(value = AuthServiceActionConst.LOGIN, method = RequestMethod.POST)
 	public ServiceResult login(@RequestBody UserAccountDto user) throws CommonException {
 		init();
 		UserAccount account = accountDao.find(UserAccount.LOGIN_NAME, user.getLoginName());
@@ -88,7 +88,7 @@ public class AuthService extends BaseService {
 		return success(new AuthorizationUserDto(authUser));
 	}
 
-	@RequestMapping(value = ServiceAuthAction.LOGOUT, method = RequestMethod.POST)
+	@RequestMapping(value = AuthServiceActionConst.LOGOUT, method = RequestMethod.POST)
 	public ServiceResult logout(@RequestBody String authToken) throws CommonException {
 		// AuthorizationUser authUser = AuthorizationUser.fromString(authToken);
 		// if (!authUser.isAuthenticated()) {

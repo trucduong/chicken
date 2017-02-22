@@ -56,4 +56,16 @@ public class UserAccount implements IEntity {
 		dto.setLoginName(loginName);
 		dto.setPassword(password);
 	}
+
+	@Override
+	public Object getEntityId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setEntityId(Object id) {
+		// TODO Auto-generated method stub
+		
+	}
 }

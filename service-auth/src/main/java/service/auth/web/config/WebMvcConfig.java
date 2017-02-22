@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import core.service.config.BaseServiceMvcConfig;
-import service.auth.shared.action.ServiceAuthAction;
+import service.auth.shared.service.AuthServiceActionConst;
 
 @Configuration
 @ComponentScan(basePackages = { "service.auth.web" })
@@ -16,7 +16,7 @@ public class WebMvcConfig extends BaseServiceMvcConfig {
 
 	@Override
 	protected void addByPassAuthorization(List<String> bypasses) {
-		bypasses.add(ServiceAuthAction.AUTH_SERVICE + ServiceAuthAction.LOGIN);
-		bypasses.add(ServiceAuthAction.AUTH_SERVICE + ServiceAuthAction.LOGOUT);
+		bypasses.add(AuthServiceActionConst.AUTH_SERVICE + AuthServiceActionConst.LOGIN);
+		bypasses.add(AuthServiceActionConst.AUTH_SERVICE + AuthServiceActionConst.LOGOUT);
 	}
 }

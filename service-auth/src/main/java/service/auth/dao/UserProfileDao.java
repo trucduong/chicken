@@ -2,7 +2,7 @@ package service.auth.dao;
 
 import org.springframework.stereotype.Repository;
 
-import core.dao.utils.BaseDao;
+import core.dao.dao.BaseDao;
 import service.auth.entities.UserProfile;
 
 @Repository

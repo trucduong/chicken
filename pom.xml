@@ -8,5 +8,6 @@
   	<module>service-auth</module>
   	<module>service-auth-shared</module>
   	<module>web-auth</module>
+  	<module>web-chicken</module>
   </modules>
 </project>

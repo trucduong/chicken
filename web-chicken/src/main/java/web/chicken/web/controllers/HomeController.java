@@ -1,4 +1,4 @@
-package web.business.web.controllers;
+package web.chicken.web.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import core.common.exception.CommonException;
 import core.web.navigation.Navigator;
-import web.business.config.View;
+import web.chicken.config.Views;
 
 @Controller
 public class HomeController {
@@ -17,9 +17,9 @@ public class HomeController {
 	@Autowired
 	Environment env;
 	
-	@RequestMapping(value = View.HOME_PAGE_URL, method = RequestMethod.GET)
+	@RequestMapping(value = Views.HOME_PAGE_URL, method = RequestMethod.GET)
 	public ModelAndView gotoHome() throws CommonException {
-		ModelAndView mv = Navigator.create(View.HOME_PAGE);
+		ModelAndView mv = Navigator.forward(Views.HOME_PAGE);
 
 //		AuthServiceAction action = new AuthServiceAction(env);
 //		ServiceResult result = action.getAccountByName("truc duong");
